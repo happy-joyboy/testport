@@ -1,0 +1,186 @@
+https://css-irl.info/drop-shadow-the-underrated-css-filter/
+
+box-sizing: border-box;
+This property alters the default box model. Normally, when you set the width and height of an element, 
+only the content size is considered, and padding and border are added to this size. With border-box, 
+the padding and border are included in the element's total width and height. This makes it easier to size elements predictably.
+
+border: none;
+This property removes any border around the element. 
+It's often used to make elements like buttons or inputs look clean and simple.
+
+outline: none;
+The outline is similar to a border but does not affect the layout of an element. 
+outline: none; removes any outline that might appear when the element is focused,
+ which is common for form elements. However, removing outlines can impact accessibility, 
+ as outlines are often used to show focus states.
+
+background-color: transparent;
+This sets the background color of the element to transparent, making it see-through.
+ The element will not have any background color, showing whatever is behind it.
+
+position: fixed;
+This positions the element relative to the viewport, meaning it stays in the same place even if the page is scrolled.
+ It's often used for elements like headers or footers that need to remain visible.
+
+top: 0;
+When combined with position: fixed;, this property places the element at the top of the viewport. 
+The 0 value means it's flush with the top edge.
+
+left: 0;
+Similar to top: 0;, this property places the element at the left edge of the viewport.
+
+padding: 1rem 10%;
+This adds space inside the element. The first value (1rem) applies to the top and bottom, 
+providing a standard space relative to the root font size. The second value (10%) applies to the left and right,
+ taking up 10% of the parent element's width.
+
+filter: drop-shadow(10px);
+This applies a shadow effect to the element. The drop-shadow() function is a CSS function that applies a shadow to the element, 
+and 10px is the value for the shadow's offset. 
+You might need to specify more parameters (e.g., color, blur radius) to control the appearance fully, 
+as the code you've provided seems to have a typo or missing values.
+
+z-index: 100;
+The z-index property controls the stacking order of elements. 
+Elements with a higher z-index value are placed in front of those with a lower value. Here, 100 is a relatively high value, 
+ensuring that this element will appear on top of others with lower or no z-index.
+
+
+Sure! Let's break down each of these CSS commands and understand what they do:
+1. @keyframes cursor
+
+css
+
+@keyframes cursor {
+    to {
+        border-left: 3px solid #b74b4b;
+    }
+}
+
+    Definition: The @keyframes rule is used to define animations in CSS. It specifies the styles for the animation at various points during the animation cycle.
+    Explanation: This @keyframes cursor defines an animation called cursor. It doesn't use the usual from and to keywords for the complete transition but directly starts with to. The animation applies a border-left of 3px solid #b74b4b to the element, making it appear like a blinking cursor typically seen in text editors. This is a simple animation that will transition to a state where there is a 3-pixel-wide, solid-colored left border.
+
+2. @keyframes words
+
+css
+
+@keyframes words {
+    0%, 20% {
+        content: "Web Developer";
+    }
+    21%, 40% {
+        content: "Developer";
+    }
+    41%, 60% {
+        content: "Java Developer";
+    }
+    61%, 80% {
+        content: "Engineer";
+    }
+    81%, 100% {
+        content: "Hacker";
+    }
+}
+
+    Definition: This @keyframes words rule defines another animation named words.
+    Explanation: It changes the content property of a pseudo-element at different stages of the animation:
+        0%, 20%: From the start of the animation to 20% of its duration, it will show "Web Developer".
+        21%, 40%: From 21% to 40% of its duration, it changes to "Developer".
+        41%, 60%: From 41% to 60%, it displays "Java Developer".
+        61%, 80%: From 61% to 80%, it switches to "Engineer".
+        81%, 100%: From 81% to the end, it shows "Hacker".
+    Purpose: This creates a typing effect that cycles through different text values, simulating a changing job title or role.
+
+3. animation: cursor 0.6s infinite;
+
+    Definition: The animation property is shorthand for several animation properties, including animation-name, animation-duration, and others.
+    Explanation:
+        cursor: Refers to the animation name defined by the @keyframes cursor.
+        0.6s: Sets the duration of one cycle of the animation to 0.6 seconds.
+        infinite: The animation will repeat infinitely.
+
+This line is used to apply the cursor animation, making an element's left border blink, simulating a typing cursor effect.
+4. .typing-text span::before
+
+    Explanation: This selector applies styles to the ::before pseudo-element of any span inside an element with the typing-text class.
+    Purpose: The ::before pseudo-element allows content to be inserted before the actual content of the element. In this case, it's used to show different words as defined by the @keyframes words animation, making it appear as though the text is being typed out.
+
+5. transition: 0.3s ease;
+
+    Definition: The transition property is used to smoothly animate changes in CSS property values.
+    Explanation:
+        0.3s: Specifies the duration of the transition (0.3 seconds).
+        ease: A timing function that starts slow, speeds up, and then slows down at the end. It controls the acceleration of the transition.
+
+This property makes any changes to the associated element's style properties occur gradually over 0.3 seconds instead of instantaneously.
+6. position: relative;
+
+    Definition: The position property specifies the positioning method for an element.
+    Explanation: relative means the element is positioned relative to its normal position. This allows you to use the top, right, bottom, and left properties to offset it from its original position without affecting the layout around it.
+
+This is often used with pseudo-elements (::before and ::after) to control their positioning relative to their parent element.
+
+3. .typing-text span::before Selector
+
+css
+
+.typing-text span::before {
+    content: "Software Developer";
+    color: #b74b4b;
+    animation: words 20s infinite;
+}
+
+    content: "Software Developer";: The initial content displayed before any animation starts. It will be overridden by the words animation.
+    color: #b74b4b;: Sets the text color to a shade of red.
+    animation: words 20s infinite;: Applies the words animation over 20 seconds, repeating infinitely. This animation changes the content property to display different job titles one after another.
+
+4. .typing-text span::after Selector
+
+css
+
+.typing-text span::after {
+    content: '';
+    background-color: black;
+    position: absolute;
+    height: 100%;
+    width: calc(100% + 8px);
+    border-left: 3px solid black;
+    right: -8;
+    animation: cursor 0.6s infinite, typing 20s steps(14) infinite;
+}
+
+    content: '';: Inserts an empty string. This is common for cursor effects.
+    background-color: black;: The background color of the ::after pseudo-element is set to black, which hides the text behind it during certain parts of the typing animation.
+    position: absolute;: Positions the pseudo-element absolutely relative to its relatively positioned parent (span).
+    height: 100%;: The pseudo-element takes the full height of its parent.
+    width: calc(100% + 8px);: The width of the pseudo-element is calculated to be the full width of the parent element plus an additional 8 pixels. This extra width ensures the cursor effect covers the entire text area.
+    border-left: 3px solid black;: Adds a black border on the left side to simulate the typing cursor.
+    right: -8;: Positions the pseudo-element 8 pixels to the left of the parent's right edge, aligning it for the cursor effect.
+    animation: cursor 0.6s infinite, typing 20s steps(14) infinite;: Applies two animations:
+        cursor 0.6s infinite;: Makes the left border (cursor) blink every 0.6 seconds.
+        typing 20s steps(14) infinite;: Creates the typing effect. The steps(14) function indicates that the animation should happen in 14 discrete steps (one for each letter or space in the content), which aligns with the word change timing.
+
+7. @keyframes typing
+
+css
+
+@keyframes typing {
+    10%, 15%, 
+    30%, 35%, 
+    50%, 55%, 
+    70%, 75%, 
+    90%, 95% {
+        width: 0;
+    }
+    5%, 20%, 
+    25%, 40%, 
+    45%, 60%, 
+    65%, 80%, 85% {
+        width: calc(100% + 8px);
+    }
+}
+
+    This animation simulates the typing effect by changing the width of the ::after pseudo-element:
+        At specific intervals (10%, 15%, etc.), the width is set to 0, hiding the text.
+        At other intervals (5%, 20%, etc.), the width is set to calc(100% + 8px), revealing the text.
